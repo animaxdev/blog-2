@@ -6,8 +6,11 @@ help: ## Display this help menu
 build: ## Build jekyll site
 	jekyll build
 
-deploy: build ## Do everything
+purge: ## Purge css
+	npx purgecss --css _site/assets/css/main.css --content _site/*.html --output _site/assets/css -w highlight,pre
 
-.PHONY: help build deploy
+deploy: build purge ## Do everything
+
+.PHONY: help build purge deploy
 
 .DEFAULT_GOAL := deploy
